@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SQL Injection Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f9;
+    }
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      text-align: center;
+    }
+    h2 {
+      margin-top: 0;
+    }
+    label, button {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+    }
+    input[type="text"], button {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      border: none;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>SQL Injection Demo</h2>
+    <form action="/sql-injection" method="POST">
+      <label for="username">Enter Username:</label>
+      <input type="text" id="username" name="username" required>
+      
+      <label>
+        <input type="checkbox" id="vulnerability" name="vulnerability" value="enabled">
+        Enable SQL Injection Vulnerability
+      </label>
+      
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</body>
+</html>

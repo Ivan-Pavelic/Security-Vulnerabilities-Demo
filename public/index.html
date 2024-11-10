@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Security Vulnerabilities Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f9;
+    }
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 1.5em;
+      margin-top: 0;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      margin: 10px 0;
+    }
+    a {
+      color: #007bff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    a:hover {
+      color: #0056b3;
+    }
+    .highlight {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome to the Security Vulnerabilities Demo</h1>
+    <p>This application allows testing of two vulnerabilities:</p>
+    <ul>
+      <li><a href="/sql_injection.html">SQL Injection</a></li>
+      <li><a href="/csrf.html">CSRF</a></li>
+    </ul>
+    <p><a href="/csrf_attack.html" class="highlight">CSRF Attack Simulation</a></p>
+  </div>
+</body>
+</html>

