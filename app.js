@@ -1,6 +1,6 @@
 const express = require('express');
 const session = require('express-session');
-const RedisStore = require('connect-redis');
+const RedisStore = require('connect-redis')(session);
 const { createClient } = require('redis');
 const path = require('path');
 const { Pool } = require('pg');
@@ -39,6 +39,7 @@ app.use(session({
   saveUninitialized: true,
   cookie: { secure: 'auto' }
 }));
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res) => {

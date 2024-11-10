@@ -1,40 +1,39 @@
-# Security Vulnerabilities Demo
+# Demo Sigurnosnih Ranjivosti
 
-This web application demonstrates two security vulnerabilities: SQL Injection and Cross-Site Request Forgery (CSRF). The application allows toggling of each vulnerability through the user interface to enable or disable the specific vulnerability.
+Ova web aplikacija demonstrira dvije sigurnosne ranjivosti: SQL umetanje (SQL Injection) i Cross-Site Request Forgery (CSRF). Aplikacija omogućuje uključivanje i isključivanje svake ranjivosti putem korisničkog sučelja.
 
-## Features
-- **SQL Injection**: Allows testing of SQL Injection attacks by toggling the vulnerability on or off.
-- **CSRF**: Enables or disables CSRF protection to simulate successful or unsuccessful attacks.
+## Značajke
+- **SQL umetanje**: Omogućuje testiranje SQL Injection napada uključivanjem ili isključivanjem ranjivosti.
+- **CSRF**: Omogućuje ili onemogućuje CSRF zaštitu za simulaciju uspješnih ili neuspješnih napada.
 
-## How to Use
-1. **SQL Injection**:
-   - Navigate to the SQL Injection page and input a username.
-   - Toggle the vulnerability to enable or disable SQL Injection attacks.
-   - Test by entering SQL injection payloads (e.g., `' OR '1'='1`).
+## Upute za korištenje
+1. **SQL umetanje (SQL Injection)**:
+   - Otvorite stranicu za SQL Injection i unesite korisničko ime.
+   - Označite ili uklonite ranjivost kako biste omogućili ili onemogućili SQL Injection napade.
+   - Testirajte unosom SQL injection izraza (npr. `' OR '1'='1`).
    
 2. **CSRF**:
-   - Navigate to the CSRF page to update user status.
-   - Enable or disable the vulnerability using the checkbox.
-   - Use the CSRF Attack page to perform a simulated CSRF attack.
+   - Otvorite stranicu za CSRF kako biste ažurirali status korisnika.
+   - Uključite ili isključite ranjivost pomoću checkboxa.
+   - Koristite CSRF Attack stranicu za izvođenje simuliranog CSRF napada.
 
-## Testing Each Vulnerability
-1. **SQL Injection**:
-   - Enable SQL Injection vulnerability and try a SQL injection payload.
-   - If the vulnerability is enabled, unauthorized access should be granted.
-   - If disabled, the application should block unauthorized access.
+## Testiranje svake ranjivosti
+1. **SQL umetanje (SQL Injection)**:
+   - Omogućite SQL Injection ranjivost i pokušajte unijeti SQL injection izraz.
+   - Ako je ranjivost omogućena, aplikacija će dopustiti neovlašteni pristup.
+   - Ako je onemogućena, aplikacija bi trebala blokirati neovlašteni pristup.
 
 2. **CSRF**:
-   - Enable CSRF vulnerability on the CSRF page.
-   - Attempt an attack via the CSRF Attack page.
-   - If the vulnerability is enabled, the attack should succeed.
-   - If disabled, the attack should be blocked.
+   - Omogućite CSRF ranjivost na CSRF stranici.
+   - Pokušajte izvršiti napad putem CSRF Attack stranice.
+   - Ako je ranjivost omogućena, napad bi trebao uspjeti.
+   - Ako je onemogućena, napad bi trebao biti blokiran.
 
-## Deployment
-Instructions for deploying to a cloud environment like Render.
+## Implementacija
+Upute za implementaciju aplikacije u oblak, poput Render platforme.
 
-### Running Locally
-1. Clone the repository.
-2. Install dependencies: `npm install`
-3. Start the application: `node app.js`
-4. Access the application on `http://localhost:3000`.
-
+### Pokretanje lokalno
+1. Klonirajte repozitorij.
+2. Instalirajte ovisnosti: `npm install`
+3. Pokrenite aplikaciju: `node app.js`
+4. Pristupite aplikaciji na `http://localhost:3000`.
