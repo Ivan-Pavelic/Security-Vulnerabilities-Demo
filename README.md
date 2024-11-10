@@ -7,15 +7,15 @@ Ova web aplikacija demonstrira dvije sigurnosne ranjivosti: SQL umetanje (SQL In
 - **CSRF**: Omogućuje ili onemogućuje CSRF zaštitu za simulaciju uspješnih ili neuspješnih napada.
 
 ## Upute za korištenje
-1. **SQL umetanje (SQL Injection)**:
-   - Otvorite stranicu za SQL Injection i unesite korisničko ime.
-   - Označite ili uklonite ranjivost kako biste omogućili ili onemogućili SQL Injection napade.
-   - Testirajte unosom SQL injection izraza (npr. `' OR '1'='1`).
+1. **SQL Injection**:
+   - Otvorite stranicu za SQL Injection i unesite korisničko ime (admin ili user) za dohvat informacija o korisniku.
+   - Omogućite ili onemogućite SQL Injection ranjivost pomoću checkboxa.
+   - Testirajte unosom SQL injection izraza (npr. `' OR '1'='1`) u korisničko ime.
    
 2. **CSRF**:
    - Otvorite stranicu za CSRF kako biste ažurirali status korisnika.
    - Uključite ili isključite ranjivost pomoću checkboxa.
-   - Koristite CSRF Attack stranicu za izvođenje simuliranog CSRF napada.
+   - Na temelju zadnjeg poslanog zahtjeva ((ne)označenog checkboxa) pokrenite CSRF Attack stranicu za izvođenje simuliranog CSRF napada.
 
 ## Testiranje svake ranjivosti
 1. **SQL umetanje (SQL Injection)**:
@@ -28,9 +28,6 @@ Ova web aplikacija demonstrira dvije sigurnosne ranjivosti: SQL umetanje (SQL In
    - Pokušajte izvršiti napad putem CSRF Attack stranice.
    - Ako je ranjivost omogućena, napad bi trebao uspjeti.
    - Ako je onemogućena, napad bi trebao biti blokiran.
-
-## Implementacija
-Upute za implementaciju aplikacije u oblak, poput Render platforme.
 
 ### Pokretanje lokalno
 1. Klonirajte repozitorij.
