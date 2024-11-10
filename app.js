@@ -2,7 +2,6 @@ const express = require('express');
 const session = require('express-session');
 const path = require('path');
 const { Pool } = require('pg');
-const db = new Database(':memory:');
 const app = express();
 const PORT = 3000;
 
