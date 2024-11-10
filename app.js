@@ -1,13 +1,24 @@
 const express = require('express');
 const session = require('express-session');
-const RedisStore = require('connect-redis')(session);
+const RedisStore = require('connect-redis').default;
 const { createClient } = require('redis');
 const path = require('path');
 const { Pool } = require('pg');
 const app = express();
 const PORT = process.env.PORT || 3000;
+
 let redisClient = createClient({ url: process.env.REDIS_URL });
 redisClient.connect().catch(console.error);
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  store: new RedisStore({ client: redisClient }),
+  secret: 'tajna_kljucna_rijec',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: 'auto' }
+}));
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -32,16 +43,7 @@ pool.query(`
 })
 .catch(err => console.error('Error creating table:', err));
 
-app.use(session({
-  store: new RedisStore({ client: redisClient }),
-  secret: 'tajna_kljucna_rijec',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: 'auto' }
-}));
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
