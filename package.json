@@ -12,10 +12,12 @@
   "dependencies": {
     "better-sqlite3": "^11.5.0",
     "body-parser": "^1.20.3",
+    "connect-redis": "^7.1.1",
     "cors": "^2.8.5",
     "express": "^4.21.1",
     "express-session": "^1.18.1",
-    "pg": "^8.13.1"
+    "pg": "^8.13.1",
+    "redis": "^4.7.0"
   },
   "description": ""
 }
