@@ -99,12 +99,11 @@ app.post('/csrf', (req, res) => {
 
   if (req.body.vulnerability !== undefined) {
     req.session.isVulnerable = req.body.vulnerability === 'enabled';
-    console.log('Postavljena vrijednost isVulnerable:', req.session.isVulnerable);
   }
+  
+  req.session.lastStatus = newStatus;
 
   const isVulnerable = req.session.isVulnerable || false;
-
-  console.log('Čitamo isVulnerable iz sesije:', isVulnerable);
 
   if (isVulnerable) {
     res.send(`Status successfully updated to: ${newStatus}`);
@@ -115,4 +114,29 @@ app.post('/csrf', (req, res) => {
       res.status(403).send('Invalid CSRF token. Access denied.');
     }
   }
+});
+
+app.get('/csrf', (req, res) => {
+  const lastStatus = req.session.lastStatus || '';
+  const isVulnerable = req.session.isVulnerable || false;
+
+  res.send(`
+    <html>
+      <head>
+        <title>CSRF Demo</title>
+      </head>
+      <body>
+        <h2>CSRF Demo</h2>
+        <form action="/csrf" method="POST">
+          <label for="status">New User Status:</label>
+          <input type="text" id="status" name="status" value="${lastStatus}">
+          <br><br>
+          <label for="vulnerability">Enable CSRF Vulnerability:</label>
+          <input type="checkbox" id="vulnerability" name="vulnerability" value="enabled" ${isVulnerable ? 'checked' : ''}>
+          <br><br>
+          <button type="submit">Update Status</button>
+        </form>
+      </body>
+    </html>
+  `);
 });
