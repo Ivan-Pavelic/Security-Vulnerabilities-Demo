@@ -11,8 +11,21 @@ app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
 
-let redisClient = createClient({ url: process.env.REDIS_URL });
+const redisClient = redis.createClient({
+  url: process.env.REDIS_URL,
+  legacyMode: true,
+});
 redisClient.connect().catch(console.error);
+
+redisClient.set("testKey", "testValue", (err, reply) => {
+  if (err) console.error("Redis set error:", err);
+  else console.log("Redis set reply:", reply);
+});
+
+redisClient.get("testKey", (err, reply) => {
+  if (err) console.error("Redis get error:", err);
+  else console.log("Redis get reply:", reply);
+});
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
