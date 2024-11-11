@@ -79,10 +79,12 @@ app.post('/sql-injection', (req, res) => {
 app.post('/csrf', (req, res) => {
   const newStatus = req.body.status;
 
-  req.session.isVulnerable = req.body.vulnerability === 'enabled';
-  console.log('Postavljena vrijednost isVulnerable:', req.session.isVulnerable);
+  if (req.body.vulnerability !== undefined) {
+    req.session.isVulnerable = req.body.vulnerability === 'enabled';
+    console.log('Postavljena vrijednost isVulnerable:', req.session.isVulnerable);
+  }
 
-  const isVulnerable = req.session.isVulnerable;
+  const isVulnerable = req.session.isVulnerable || false;
 
   console.log('Čitamo isVulnerable iz sesije:', isVulnerable);
 
