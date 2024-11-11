@@ -103,22 +103,31 @@ app.post('/csrf', (req, res) => {
   
   req.session.lastStatus = newStatus;
 
-  const isVulnerable = req.session.isVulnerable || false;
-
-  if (isVulnerable) {
-    res.send(`Status successfully updated to: ${newStatus}`);
-  } else {
-    if (req.headers['csrf-token'] === '12345') {
-      res.send(`Secure status successfully updated to: ${newStatus}`);
-    } else {
-      res.status(403).send('Invalid CSRF token. Access denied.');
+  req.session.save(err => {
+    if (err) {
+      console.error("Error saving session:", err);
+      return res.status(500).send("Error saving session.");
     }
-  }
+
+    const isVulnerable = req.session.isVulnerable || false;
+
+    if (isVulnerable) {
+      res.send(`Status successfully updated to: ${newStatus}`);
+    } else {
+      if (req.headers['csrf-token'] === '12345') {
+        res.send(`Secure status successfully updated to: ${newStatus}`);
+      } else {
+        res.status(403).send('Invalid CSRF token. Access denied.');
+      }
+    }
+  });
 });
 
 app.get('/csrf', (req, res) => {
   const lastStatus = req.session.lastStatus || '';
   const isVulnerable = req.session.isVulnerable || false;
+
+  console.log("Reading from session:", { lastStatus, isVulnerable });
 
   res.send(`
     <html>
