@@ -7,14 +7,11 @@ const { Pool } = require('pg');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
-
-const redisClient = redis.createClient({
+const redisClient = createClient({
   url: process.env.REDIS_URL,
   legacyMode: true,
 });
+
 redisClient.connect().catch(console.error);
 
 redisClient.set("testKey", "testValue", (err, reply) => {
@@ -60,6 +57,9 @@ pool.query(`
 })
 .catch(err => console.error('Error creating table:', err));
 
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
