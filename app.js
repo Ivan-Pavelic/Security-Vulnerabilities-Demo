@@ -75,16 +75,10 @@ app.post('/sql-injection', (req, res) => {
 app.post('/csrf', (req, res) => {
   const newStatus = req.body.status;
 
-  if (req.body.vulnerability === 'enabled') {
-    req.session.isVulnerable = true;
-  } else {
-    req.session.isVulnerable = false;
-  }
-
+  req.session.isVulnerable = req.body.vulnerability === 'enabled';
   console.log('Postavljena vrijednost isVulnerable:', req.session.isVulnerable);
 
   const isVulnerable = req.session.isVulnerable;
-  console.log('Čitamo isVulnerable iz sesije prilikom provjere:', isVulnerable);
 
   if (isVulnerable) {
     res.send(`Status successfully updated to: ${newStatus}`);
@@ -95,8 +89,4 @@ app.post('/csrf', (req, res) => {
       res.status(403).send('Invalid CSRF token. Access denied.');
     }
   }
-});
-
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
 });
