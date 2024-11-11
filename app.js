@@ -8,8 +8,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const redisClient = createClient({
-  url: process.env.REDIS_URL,
-  legacyMode: true,
+  url: process.env.REDIS_URL
 });
 
 redisClient.connect().catch(console.error);
@@ -31,8 +30,14 @@ app.use(session({
   secret: 'tajna_kljucna_rijec',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: 'auto' }
+  cookie: { secure: 'false ' }
 }));
+app.use((req, res, next) => {
+  if (req.session.isVulnerable === undefined) {
+    req.session.isVulnerable = false;
+  }
+  next();
+});
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
