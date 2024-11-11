@@ -84,6 +84,8 @@ app.post('/csrf', (req, res) => {
 
   const isVulnerable = req.session.isVulnerable;
 
+  console.log('Čitamo isVulnerable iz sesije:', isVulnerable);
+
   if (isVulnerable) {
     res.send(`Status successfully updated to: ${newStatus}`);
   } else {
