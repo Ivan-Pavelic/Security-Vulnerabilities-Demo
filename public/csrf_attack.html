@@ -67,8 +67,7 @@
           "Content-Type": "application/x-www-form-urlencoded"
         },
         body: new URLSearchParams({
-          status: "Hacked",
-          vulnerability: "enabled" // Ovo šalje signal da ranjivost treba biti omogućena
+          status: "Hacked" // Status koji želite poslati
         })
       })
       .then(response => response.text())
