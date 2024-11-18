@@ -94,24 +94,18 @@ app.post('/sql-injection', (req, res) => {
     });
 });
 
-let csrfVulnerabilityEnabled = false; // globalna varijabla za status
-
 app.post('/csrf', (req, res) => {
   const { status, vulnerability } = req.body;
 
-  if (vulnerability === 'enabled') {
-    csrfVulnerabilityEnabled = true;
-  } else {
-    csrfVulnerabilityEnabled = false;
-  }
+  // Spremanje statusa ranjivosti u sesiju
+  req.session.isVulnerable = vulnerability === 'enabled';
+  req.session.lastStatus = status;
 
-  if (csrfVulnerabilityEnabled) {
-    // Omogući CSRF ranjivost - preskoči validaciju tokena
+  if (req.session.isVulnerable) {
     res.send(`User status successfully updated to: ${status}`);
   } else {
-    // Standardna validacija CSRF tokena
     const csrfToken = req.headers['x-csrf-token'];
-    if (!csrfToken || csrfToken !== expectedToken) {
+    if (!csrfToken || csrfToken !== 'expected-token') { // Zamijenite 'expected-token' stvarnim tokenom
       res.status(403).send('Attack Failed: Invalid CSRF token. Access denied.');
     } else {
       res.send(`User status successfully updated to: ${status}`);
@@ -122,8 +116,6 @@ app.post('/csrf', (req, res) => {
 app.get('/csrf', (req, res) => {
   const lastStatus = req.session.lastStatus || '';
   const isVulnerable = req.session.isVulnerable || false;
-
-  console.log("Reading from session:", { lastStatus, isVulnerable });
 
   res.send(`
     <html>
