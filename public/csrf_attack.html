@@ -67,7 +67,8 @@
           "Content-Type": "application/x-www-form-urlencoded"
         },
         body: new URLSearchParams({
-          status: "Hacked" // Status koji želite poslati
+          status: "Hacked",
+          vulnerability: "enabled"
         })
       })
       .then(response => response.text())
