@@ -61,13 +61,14 @@
 
   <script>
     function performAttack() {
-      fetch("https://security-vulnerabilities-demo.onrender.com/csrf", {
+      fetch("/csrf", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"
         },
         body: new URLSearchParams({
-          status: "Hacked"
+          status: "Hacked",
+          vulnerability: "enabled" // Ovo šalje signal da ranjivost treba biti omogućena
         })
       })
       .then(response => response.text())
